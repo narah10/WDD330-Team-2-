@@ -14,11 +14,11 @@ function renderCartContents() {
 
 function setTotal() {
   const getItems = getLocalStorage("so-cart");
+  let cartTotal = document.querySelector(".cart-total");
+  let hideClass = document.querySelector(".hide");
   
   if (getItems.length > 0) {
     let total = 0;
-    let hideClass = document.querySelector(".hide");
-    let cartTotal = document.querySelector(".cart-total");
 
     for (let i = 0; i < getItems.length; i++) {
       const firstItem = getItems[i].ListPrice;
@@ -28,7 +28,6 @@ function setTotal() {
     hideClass.classList.remove("hide");
     cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
   } else {
-    console.log("length is less than 1!");
         hideClass.classList.add("hide");
   }
 }
@@ -49,12 +48,27 @@ function cartItemTemplate(item) {
 
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
-
+  <button class="cart-card__remove" data-id="${item.Id}">Remove</button>
+  </li>`;
   return newItem;
 }
 
+document.addEventListener('click', function (event) {
+  if (event.target.classList.contains('cart-card__remove')) {
+    const itemId = event.target.dataset.id;
+    removeFromLocalStorage("so-cart", itemId);
+    renderCartContents();
+    this.location.reload()
+  }
+});
+
+function removeFromLocalStorage(key, itemId) {
+  let cartItems = getLocalStorage(key) || [];
+  const indexToRemove = cartItems.findIndex(item => item.Id === itemId);
+  if (indexToRemove !== -1) {
+    cartItems.splice(indexToRemove, 1);
+    localStorage.setItem(key, JSON.stringify(cartItems));
+  }
+}
+
 renderCartContents();
-
-
-{/* <p class="cart-card__color">${item.Colors[0].ColorName}</p> */}
