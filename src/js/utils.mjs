@@ -28,3 +28,21 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+export function itemAmountInCart(){
+  const pill = document.querySelector('.pill');
+  function updateCartCount() {
+      const getItems = getLocalStorage("so-cart");
+      if(getItems.length > 0){
+          pill.innerHTML = getItems.length;
+      } 
+  }
+
+  
+  updateCartCount();
+
+  setInterval(updateCartCount, 1000); 
+  
+}
+
+itemAmountInCart();
