@@ -177,6 +177,18 @@ button {
   align-items: center;
 }
 
+.product_price{
+  color: red;
+  display: inline;
+  margin: 5px;
+}
+
+.product-card__disccount{
+  font-weight: bold;
+  margin: 10px;
+}
+
+
 .cart-card__image {
   grid-row: 1/4;
   grid-column: 1;
