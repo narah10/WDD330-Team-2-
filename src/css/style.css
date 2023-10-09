@@ -114,6 +114,23 @@ button {
 }
 /* End cart icon styles */
 
+/*Adding cart effect*/
+.hidden {
+  display: none;
+  color: blue;
+}
+#cartMessage {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 1; 
+}
+
 .mission {
   padding: 0 0.5em;
   /* margin: 0.5em 0; */
@@ -270,3 +287,4 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+

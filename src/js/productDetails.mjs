@@ -15,7 +15,10 @@ export default async function productDetails(productId, selector) {
       const el = document.querySelector(selector);
       el.insertAdjacentHTML("afterBegin", productDetailsTemplate(product));
       // Add a listener to the "Add to Cart" button
-      document.querySelector("#addToCart").addEventListener("click", addProductToCart);
+      document.querySelector("#addToCart").addEventListener("click", function() {
+        addProductToCart();
+        showCartMessage();
+      });
     } else {
       showError("Sorry, this Product was not found.", selector);
     }
@@ -27,6 +30,16 @@ export default async function productDetails(productId, selector) {
 
 function addProductToCart() {
   setLocalStorage("so-cart", product);
+  console.log("item-added")
+}
+
+function showCartMessage() {
+  const cartMessage = document.getElementById('cartMessage');
+  cartMessage.style.display = 'block';
+
+  setTimeout(function () {
+    cartMessage.style.display = 'none';
+  }, 3000);
 }
 
 function productDetailsTemplate(product) {
@@ -48,5 +61,6 @@ function productDetailsTemplate(product) {
   <p class="product__description">${product.DescriptionHtmlSimple}</p>
   <div class="product-detail__add">
     <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+    <div id="cartMessage" class="hidden">Item added to the cart</div>
   </div>`;
 }
