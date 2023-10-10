@@ -1,6 +1,8 @@
 import { findProductById } from "./productData.mjs";
 import { setLocalStorage } from "./utils.mjs";
 import { showError } from "./errorHandling.mjs";
+import { calculateDiscount } from "./product";
+
 
 let product = {};
 
@@ -22,11 +24,13 @@ export default async function productDetails(productId, selector) {
   }
 }
 
+
 function addProductToCart() {
   setLocalStorage("so-cart", product);
 }
 
 function productDetailsTemplate(product) {
+  const discount = calculateDiscount(product);
   return `<h3>${product.Brand.Name}</h3>
 
   <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -37,12 +41,11 @@ function productDetailsTemplate(product) {
     alt="${product.NameWithoutBrand}"
   />
 
-  <p class="product-card__price">${product.FinalPrice}</p>
-
+  <del class="cart-card__disccount">$${product.SuggestedRetailPrice}</del>
+  <p class="product-card__price product_price">$${product.FinalPrice}</p>
+  <p class="discount_price">REDUCED PRICE Yous Save: ${discount.percentage.toFixed(2)}%</p>
   <p class="product__color">${product.Colors[0].ColorName}</p>
-
   <p class="product__description">${product.DescriptionHtmlSimple}</p>
-
   <div class="product-detail__add">
     <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
   </div>`;

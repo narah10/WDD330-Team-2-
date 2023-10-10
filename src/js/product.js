@@ -1,5 +1,7 @@
 import productDetails from "./productDetails.mjs";
 import { getParam } from "./utils.mjs";
+import product from '../public/json/tents.json';
+
 
 // add to cart button event handler
 // async function addToCartHandler(e) {
@@ -13,3 +15,15 @@ productDetails(productId, ".product-detail");
 // document
 //   .getElementById("addToCart")
   // .addEventListener("click", addToCartHandler);
+
+export function calculateDiscount(product) {
+let suggestedPrice = product.SuggestedRetailPrice;
+let finalPrice = product.FinalPrice;
+
+let discountValue = suggestedPrice - finalPrice;
+let discountPercentage = (discountValue / suggestedPrice) * 100;
+
+return {
+    percentage: discountPercentage
+};
+}
