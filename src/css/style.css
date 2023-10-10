@@ -103,6 +103,19 @@ button {
   text-align: center;
 }
 
+.pill {
+  position: absolute; 
+  left: 10px;
+  top: 10px;
+  align-items: center;
+  color: black;
+  font-size:15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #f0a868;;
+  border-radius: 120px;
+}
+
 .cart svg {
   width: 25px;
 }
