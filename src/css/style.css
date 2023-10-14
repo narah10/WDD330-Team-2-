@@ -76,6 +76,49 @@ header {
 .logo--square > div {
   margin-top: -1.7em;
 }
+.popup{
+  background-color: #f0a868;
+  width: 450px;
+  padding: 30px 40px;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  top: 50%;
+  border-radius: 8px;
+  font-family: "Poppins",sans-serif;
+  display: none;
+  text-align: center;
+}
+.popup button{
+  display: block;
+  background-color: transparent;
+  font-size: 30px;
+  color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.popup p{
+  font-size: 14px;
+  margin: 20px 0;
+  line-height: 25px;
+  text-align: center;
+}
+input{ 
+border-color:black; 
+}
+.pButton{
+  display: block;
+  width: 150px;
+  position: relative;
+  margin: 10px auto;
+  text-align: center;
+  background-color: #0f72e5;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 5px 0;
+}
+
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
@@ -112,7 +155,7 @@ button {
   font-size:15px;
   padding-left: 5px;
   padding-right: 5px;
-  background-color: #f0a868;;
+  background-color: #f0a868;
   border-radius: 120px;
 }
 
