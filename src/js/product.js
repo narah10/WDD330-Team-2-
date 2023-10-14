@@ -1,8 +1,9 @@
 import productDetails from "./productDetails.mjs";
 import { getParam } from "./utils.mjs";
 import product from '../public/json/tents.json';
+import { renderHeaderFooter } from "./utils.mjs";
 
-
+renderHeaderFooter();
 // add to cart button event handler
 // async function addToCartHandler(e) {
 //   const product = await findProductById(e.target.dataset.id);
@@ -25,5 +26,6 @@ let discountPercentage = (discountValue / suggestedPrice) * 100;
 
 return {
     percentage: discountPercentage
+    
 };
 }

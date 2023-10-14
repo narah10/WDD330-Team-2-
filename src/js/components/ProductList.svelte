@@ -8,6 +8,9 @@
  
 </script>
 
+
+
+
 <h2>Top Products</h2>
 {#await promise}
   <p>Loading</p>
