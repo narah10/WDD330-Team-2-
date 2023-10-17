@@ -1,3 +1,7 @@
+import MainHeader from './components/MainHeader.svelte'
+import MainFooter from './components/MainFooter.svelte'
+import { cartCount } from './stores.mjs';
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -14,6 +18,8 @@ export function setLocalStorage(key, data) {
   let cart = getLocalStorage(key) || [];
   cart.push(data);
   localStorage.setItem(key, JSON.stringify(cart));
+  cartCount.set(cart.length);
+  
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
@@ -29,20 +35,39 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-export function itemAmountInCart(){
-  const pill = document.querySelector('.pill');
-  function updateCartCount() {
-      const getItems = getLocalStorage("so-cart");
-      if(getItems.length > 0){
-          pill.innerHTML = getItems.length;
-      } 
-  }
-
-  
-  updateCartCount();
-
-  setInterval(updateCartCount, 1000); 
-  
+export function getCartCount(){
+  const count = getLocalStorage("so-cart")?.length ?? 0;
+  return count;
 }
 
-itemAmountInCart();
+export function renderHeaderFooter(){
+  new MainHeader({
+    target: document.querySelector("#main-header"),
+  props: { cartCount: getCartCount() },
+  })
+  new MainFooter({
+    target:document.querySelector("#main-footer")
+  })
+  // itemAmountInCart();
+}
+
+
+// export function itemAmountInCart(){
+//   const pill = document.querySelector('.pill');
+//   function updateCartCount() {
+//       const getItems = getLocalStorage("so-cart");
+//       if(getItems.length > 0){
+//           pill.innerHTML = getItems.length;
+//       } else{
+//         pill.innerHTML = "";
+//       }
+//   }
+
+
+  
+//   updateCartCount();
+
+//   setInterval(updateCartCount, 1000); 
+  
+// }
+

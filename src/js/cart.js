@@ -1,4 +1,12 @@
 import { getLocalStorage } from "./utils.mjs";
+import { renderHeaderFooter } from "./utils.mjs";
+import ShoppingCart from "./components/ShoppingCart.svelte"
+
+renderHeaderFooter();
+
+new ShoppingCart({ 
+  target: document.querySelector(".products")
+})
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -44,25 +52,25 @@ function setTotal() {
 }
 setTotal();
 
-function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
+// function cartItemTemplate(item) {
+//   const newItem = `<li class="cart-card divider">
+//   <a href="#" class="cart-card__image">
+//     <img
+//       src="${item.Image}"
+//       alt="${item.Name}"
+//     />
+//   </a>
+//   <a href="#">
+//     <h2 class="card__name">${item.Name}</h2>
+//   </a>
 
-  <p class="cart-card__quantity">qty: 1</p>
-  <del class="cart-card__retail__price">$${item.SuggestedRetailPrice}</del>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-  <button class="cart-card__remove" data-id="${item.Id}">Remove</button>
-  </li>`;
-  return newItem;
-}
+//   <p class="cart-card__quantity">qty: 1</p>
+//   <del class="cart-card__retail__price">$${item.SuggestedRetailPrice}</del>
+//   <p class="cart-card__price">$${item.FinalPrice}</p>
+//   <button class="cart-card__remove" data-id="${item.Id}">Remove</button>
+//   </li>`;
+//   return newItem;
+// }
 
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("cart-card__remove")) {

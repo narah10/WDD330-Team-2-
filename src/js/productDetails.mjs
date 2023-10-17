@@ -2,6 +2,8 @@ import { findProductById } from "./productData.mjs";
 import { setLocalStorage } from "./utils.mjs";
 import { showError } from "./errorHandling.mjs";
 import { calculateDiscount } from "./product";
+import { cartCount } from "./stores.mjs";
+// import { renderHeaderFooter } from "./utils.mjs";
 
 
 let product = {};
@@ -30,7 +32,11 @@ export default async function productDetails(productId, selector) {
 
 function addProductToCart() {
   setLocalStorage("so-cart", product);
-  console.log("item-added")
+  console.log("item-added");
+  // cartCount.set(product.length);
+  // if(product = 0){
+  //   console.log("empty")
+  // }
 }
 
 function showCartMessage() {
@@ -64,3 +70,6 @@ function productDetailsTemplate(product) {
     <div id="cartMessage" class="hidden">Item added to the cart</div>
   </div>`;
 }
+// renderHeaderFooter();
+
+
