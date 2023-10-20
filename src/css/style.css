@@ -325,6 +325,19 @@ button {
   color: red;
 }
 
+/*Icon styles*/
+.icons{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  cursor: pointer;
+
+}
+
+.icons img{
+  width: 100px;
+
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

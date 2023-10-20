@@ -1,19 +1,23 @@
-// import ProductList from "./components/ProductList.svelte";
-// import Alert from "./components/Alert.svelte";
-// import { renderHeaderFooter } from "./utils.mjs";
-// import { alerts } from '../alert/alert.json';
+import ProductList from "./components/ProductList.svelte";
+import Alert from "./components/Alert.svelte";
+import { getParam } from "./utils.mjs";
+import { renderHeaderFooter } from "./utils.mjs";
+import { alerts } from '../alert/alert.json';
 
-// new ProductList({
-//     target: document.querySelector(".products"),
-//     props: { category: "tents" },
-// });
-// if(alerts != null){
-//     new Alert({
-//         target: document.querySelector("#alert-list")
-//     });
-// }
+const category = getParam("category");
 
-// renderHeaderFooter();
+new ProductList({
+    target: document.querySelector(".products"),
+    props: { category: category },
+});
+
+if(alerts != null){
+    new Alert({
+        target: document.querySelector("#alert-list")
+    });
+}
+
+renderHeaderFooter();
 
 // function checkVisit(){
 //     if(!localStorage.getItem('lastvisit')){
