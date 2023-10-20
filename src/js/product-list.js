@@ -4,6 +4,7 @@ import { getParam } from "./utils.mjs";
 import { renderHeaderFooter } from "./utils.mjs";
 import { alerts } from '../alert/alert.json';
 
+renderHeaderFooter();
 const category = getParam("category");
 
 new ProductList({
@@ -17,7 +18,7 @@ if(alerts != null){
     });
 }
 
-renderHeaderFooter();
+
 
 // function checkVisit(){
 //     if(!localStorage.getItem('lastvisit')){
