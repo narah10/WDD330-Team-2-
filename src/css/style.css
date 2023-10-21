@@ -146,7 +146,7 @@ button {
   text-align: center;
 }
 
-.pill {
+.cart-count {
   position: absolute; 
   left: 10px;
   top: 10px;
@@ -338,7 +338,44 @@ button {
 
 }
 
-@media screen and (min-width: 500px) {
+/* Large View */
+@media screen and (max-width: 2000px) {
+  body {
+    max-width: 1080px;
+    margin: auto;
+  }
+  .product-detail img{
+    /* border: 4px red solid;  */
+    width:90%
+  }
+  .cart-card__disccount{
+    display:block; 
+
+  }
+
+}
+/* Medium View */
+
+@media screen and (max-width: 1000px) {
+  .product-detail img{
+    /* border: 1px solid;  */
+    max-width:75%; 
+
+  }
+  .cart-card__disccount{
+    display:block; 
+
+  }
+  body {
+    max-width: 1080px;
+    margin: auto;
+  }
+  
+
+}
+/* Small View */
+
+@media screen and (max-width: 500px) {
   body {
     max-width: 1080px;
     margin: auto;
@@ -349,6 +386,11 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+  .product-detail img{
+    /* border: 5px green solid;  */
+    max-width:45%; 
+    margin-left:65px;  
   }
 }
 
