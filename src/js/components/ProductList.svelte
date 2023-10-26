@@ -1,23 +1,24 @@
 <script>
   import ProductSummary from "./ProductSummary.svelte";
   import { getData } from "../productData.mjs";
+  import Breadcrumb from "./Breadcrumb.svelte";
 
   export let category;
-
   let promise = getData(category);
- 
 </script>
 
-
-
-
-<h2>Top Products {category}</h2>
 {#await promise}
   <p>Loading</p>
-{:then data}
-  <ul class="product-list">
-    {#each data as product}
+{:then loadedData}
+  {#if loadedData && loadedData.length > 0}
+    <Breadcrumb category="{category}" productCount="{loadedData.length}" />
+    <h2>Top Products {category}</h2>
+    <ul class="product-list">
+      {#each loadedData as product}
         <li class="product-card"><ProductSummary {product} /></li>
-         {/each}
-  </ul>
+      {/each}
+    </ul>
+  {:else}
+    <p>No products found</p>
+  {/if}
 {/await}

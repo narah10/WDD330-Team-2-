@@ -3,21 +3,60 @@ import { setLocalStorage } from "./utils.mjs";
 import { showError } from "./errorHandling.mjs";
 import { calculateDiscount } from "./product";
 import { cartCount } from "./stores.mjs";
-// import { renderHeaderFooter } from "./utils.mjs";
 
+// Function to create breadcrumb
+function createBreadcrumb(container, category) {
+  const breadcrumbText = getBreadcrumbText(category);
+
+  if (breadcrumbText) {
+    const breadcrumbElement = document.createElement('nav');
+    breadcrumbElement.classList.add('breadcrumb');
+    breadcrumbElement.innerHTML = breadcrumbText;
+
+    container.appendChild(breadcrumbElement);
+
+    // Convert breadcrumb words to links
+    const links = container.querySelectorAll('.breadcrumb a');
+    links.forEach(link => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        const href = this.getAttribute('href');
+        // You may handle the navigation logic based on the href value
+        window.location.href = href;
+      });
+    });
+  }
+}
+
+// Function to get breadcrumb text
+function getBreadcrumbText(category) {
+  if (category) {
+    return `<a href="/">Home</a>
+            &nbsp;>&nbsp;
+            <a href="/product_list/index.html?category=${category}">${category}</a>`;
+  } else {
+    return '';
+  }
+}
 
 let product = {};
 
 export default async function productDetails(productId, selector) {
-  // Use findProductById to get the details for the current product. findProductById will return a promise.
   try {
     product = await findProductById(productId);
     if (product) {
+      // Create Breadcrumb
+      const breadcrumbContainer = document.createElement('div');
+      breadcrumbContainer.id = 'breadcrumbContainer'; // You may customize the ID
+      createBreadcrumb(breadcrumbContainer, product.Category);
+
       // Once we have the product details, we can render out the HTML
       const el = document.querySelector(selector);
       el.insertAdjacentHTML("afterBegin", productDetailsTemplate(product));
+      el.insertBefore(breadcrumbContainer, el.firstChild);
+
       // Add a listener to the "Add to Cart" button
-      document.querySelector("#addToCart").addEventListener("click", function() {
+      document.querySelector("#addToCart").addEventListener("click", function () {
         addProductToCart();
         showCartMessage();
       });
@@ -29,14 +68,9 @@ export default async function productDetails(productId, selector) {
   }
 }
 
-
 function addProductToCart() {
   setLocalStorage("so-cart", product);
   console.log("item-added");
-  // cartCount.set(product.length);
-  // if(product = 0){
-  //   console.log("empty")
-  // }
 }
 
 function showCartMessage() {
@@ -62,7 +96,7 @@ function productDetailsTemplate(product) {
 
   <del class="cart-card__disccount">$${product.SuggestedRetailPrice}</del>
   <p class="product-card__price product_price">$${product.FinalPrice}</p>
-  <p class="discount_price">REDUCED PRICE Yous Save: ${discount.percentage.toFixed(2)}%</p>
+  <p class="discount_price">REDUCED PRICE You Save: ${discount.percentage.toFixed(2)}%</p>
   <p class="product__color">${product.Colors[0].ColorName}</p>
   <p class="product__description">${product.DescriptionHtmlSimple}</p>
   <div class="product-detail__add">
@@ -70,6 +104,3 @@ function productDetailsTemplate(product) {
     <div id="cartMessage" class="hidden">Item added to the cart</div>
   </div>`;
 }
-// renderHeaderFooter();
-
-
