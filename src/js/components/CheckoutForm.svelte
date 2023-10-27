@@ -1,5 +1,7 @@
 <script>
-    import {getLocalStorage} from "../utils.mjs";
+    import {getLocalStorage, formDataToJSON} from "../utils.mjs";
+    import {checkout} from "../externalServices.mjs"
+
     export let key = " ";
 
     let list = [];
@@ -39,9 +41,98 @@
     console.log(itemTotal, shipping, tax)
 };
 init()
+
+const packageItems = function (items) {
+    const simplifiedItems = items.map((item) => {
+      console.log(item);
+      return {
+        id: item.Id,
+        price: item.FinalPrice,
+        name: item.Name,
+        quantity: 1,
+      };
+    });
+    return simplifiedItems;
+  };
+  const handleSubmit = async function (e) {
+    const json = formDataToJSON(this);
+    // add totals, and item details
+    json.orderDate = new Date();
+    json.orderTotal = orderTotal;
+    json.tax = tax;
+    json.shipping = shipping;
+    json.items = packageItems(list);
+    console.log(json);
+    try {
+      const res = await checkout(json);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
      
   </script>
-  
+
+<form name="checkout" on:submit|preventDefault={handleSubmit}>
+  <fieldset>
+    <legend>Shipping</legend>
+    <div class="checkout__name">
+      <label for="fname">First Name</label>
+      <input name="fname" required />
+      <label for="lname">Last Name</label>
+      <input name="lname" required />
+    </div>
+    <div class="checkout__address">
+      <label for="street">Street</label>
+      <input name="street" required />
+      <label for="city">City</label>
+      <input name="city" required />
+      <label for="state">State</label>
+      <input name="state" required />
+      <label for="zip">Zip</label>
+      <input name="zip" id="zip" required on:blur={calculateOrdertotal} />
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Payment</legend>
+    <label for="cardNumber">Card number</label>
+    <input
+      name="cardNumber"
+      required
+      placeholder="No spaces or dashes!"
+      maxlength="16"
+      minlength="16"
+    />
+    <label for="expiration">Expiration</label>
+    <input name="expiration" required placeholder="mm/yy" />
+    <label for="code">Security Code</label>
+    <input name="code" required placeholder="xxx" maxlength="3" minlength="3" />
+  </fieldset>
+  <fieldset class="checkout-summary">
+    <legend>Order Summary</legend>
+    <ul>
+      <li>
+        <label for="cartTotal">Item Subtotal({list.length})</label>
+        <p name="cartTotal" id="cartTotal">${itemTotal}</p>
+      </li>
+      <li>
+        <label for="shipping">Shipping Estimate</label>
+        <p id="shipping">${shipping}</p>
+      </li>
+      <li>
+        <label for="tax">Tax</label>
+        <p id="tax">${tax}</p>
+      </li>
+      <li>
+        <label for="orderTotal"><b>Order Total</b></label>
+        <p id="orderTotal">${orderTotal}</p>
+      </li>
+    </ul>
+  </fieldset>
+
+  <button id="checkoutSubmit" type="submit">Checkout</button>
+</form>
+  <!-- <form name="checkout" on:submit|preventDefault={handleSubmit}> 
   <fieldset class="checkout-summary">
     <legend>Shipping</legend>
     <form class="form-content">
@@ -75,6 +166,7 @@ init()
     <p>Shipping Estimate ${shipping}</p>
     <p>Tax ${tax}</p>
     <p>Order Total: ${orderTotal} </p>
-    <button> Place Order</button>
+    <button id="checkoutSubmit" type="submit">Place Order</button>
   </fieldset>
+</form> -->
    
