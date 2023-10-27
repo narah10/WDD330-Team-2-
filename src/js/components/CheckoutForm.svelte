@@ -18,36 +18,33 @@
     }
     
     function calculateItemSummary(){
-        const getItems = getLocalStorage("so-cart");
+    const getItems = getLocalStorage("so-cart");
 
-        if (getItems.length > 0) {
-            for (let i = 0; i < getItems.length; i++) {
+    if (getItems.length > 0) {
+        for (let i = 0; i < getItems.length; i++) {
             const firstItem = getItems[i].ListPrice;
-            orderTotal += firstItem;
-            }
-            return orderTotal.toFixed(2)
-            
+            itemTotal += firstItem; 
+        }
     }
-    
 }
 
-//     const calculateOrdertotal = function () {
-//         shipping = 10 + (list.length - 1) * 2;
-//         tax = (itemTotal * 0.06).toFixed(2);
-//         orderTotal = (
-//       parseFloat(itemTotal) +
-//       parseFloat(shipping) +
-//       parseFloat(tax)
-//     ).toFixed(2);
-//     console.log(itemTotal, shipping, tax)
-// };
+    const calculateOrdertotal = function () {
+        shipping = 10 + (list.length - 1) * 2;
+        tax = (itemTotal * 0.06).toFixed(2);
+        orderTotal = (
+      parseFloat(itemTotal) +
+      parseFloat(shipping) +
+      parseFloat(tax)
+    ).toFixed(2);
+    console.log(itemTotal, shipping, tax)
+};
 init()
      
   </script>
   
   <fieldset class="checkout-summary">
     <legend>Shipping</legend>
-    <form class="content">
+    <form class="form-content">
         <label>First Name</label>
         <input type="text"  name="fname"/>
         <label>Last Name</label>
@@ -63,7 +60,7 @@ init()
       <fieldset> 
         <legend>Payment</legend>
 
-      <form> 
+      <form class="form-content" > 
         <label>Card Number</label>
         <input type="text" name="cardNumber"/>
         <label>Expiration</label>
@@ -72,10 +69,10 @@ init()
         <input type="text"  name="code"/>
     </form>
 </fieldset>
-<fieldset> 
+<fieldset class="orderSummary"> 
     <legend>Order Summary</legend>
-    <p>Subtotal({itemTotal})  </p>
-    <p>Shipping Estimate</p>
+    <p>Subtotal ({list.length}) {itemTotal}  </p>
+    <p>Shipping Estimate ${shipping}</p>
     <p>Tax ${tax}</p>
     <p>Order Total: ${orderTotal} </p>
     <button> Place Order</button>
