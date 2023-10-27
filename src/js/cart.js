@@ -19,7 +19,7 @@ function renderCartContents() {
   }
 }
 
-function setTotal() {
+export function setTotal() {
   const getItems = getLocalStorage("so-cart");
   let cartRetail = document.querySelector(".cart-retail");
   let cartDiscount = document.querySelector(".cart-discount");
@@ -46,6 +46,8 @@ function setTotal() {
     )}<\del>`;
     cartDiscount.innerHTML = `Total Discount: ${discountAmount.toFixed(0)}%`;
     cartTotal.innerHTML = `Final Price: $${total.toFixed(2)}`;
+    // const finalTotal = total.toFixed(2);
+    // return finalTotal; 
   } else {
     hideClass.classList.add("hide");
   }
