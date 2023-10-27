@@ -349,6 +349,16 @@ button {
   font-weight: bold;
 }
 
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; 
+  width:60vw;
+}
+
+
+
+
 /* Large View */
 @media screen and (max-width: 2000px) {
   body {

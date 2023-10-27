@@ -1,10 +1,9 @@
 <script>
   import ProductSummary from "./ProductSummary.svelte";
-  import { getData } from "../productData.mjs";
+  import { getProductByCategory } from "../externalServices.mjs";
   import Breadcrumb from "./Breadcrumb.svelte";
-
   export let category;
-  let promise = getData(category);
+  let promise = getProductByCategory(category);
 </script>
 
 {#await promise}
