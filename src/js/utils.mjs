@@ -51,6 +51,17 @@ export function renderHeaderFooter(){
   // itemAmountInCart();
 }
 
+// takes a form element and returns an object where the key is the "name" of the form input.
+export function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+}
 
 // export function itemAmountInCart(){
 //   const pill = document.querySelector('.pill');
