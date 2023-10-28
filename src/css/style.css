@@ -337,6 +337,17 @@ button {
   width: 100px;
 
 }
+.breadcrumb {
+  /* background-color: #f8f9fa; */
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
 
 .form-content {
   display: flex;
