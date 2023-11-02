@@ -1,6 +1,7 @@
 import MainHeader from './components/MainHeader.svelte'
 import MainFooter from './components/MainFooter.svelte'
 import { cartCount } from './stores.mjs';
+import AlertMessage from "./components/AlertMessage.svelte"
 
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
@@ -63,22 +64,20 @@ export function formDataToJSON(formElement) {
   return convertedJSON;
 }
 
-// export function itemAmountInCart(){
-//   const pill = document.querySelector('.pill');
-//   function updateCartCount() {
-//       const getItems = getLocalStorage("so-cart");
-//       if(getItems.length > 0){
-//           pill.innerHTML = getItems.length;
-//       } else{
-//         pill.innerHTML = "";
-//       }
-//   }
-
-
-  
-//   updateCartCount();
-
-//   setInterval(updateCartCount, 1000); 
-  
-// }
-
+export function alertMessage(message, scroll=true, duration=3000) {
+  const alert = new AlertMessage({
+      target: document.querySelector("body"),
+      anchor: document.querySelector("main"),
+      props: {
+      message,
+      },
+  });
+    // make sure they see the alert by scrolling to the top of the window
+    //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+    if (scroll) window.scrollTo(0, 0);
+    
+    // left this here to show how you could remove the alert automatically after a certain amount of time.
+    // setTimeout(function () {
+    //   alert.$destroy();
+    // }, duration);
+}

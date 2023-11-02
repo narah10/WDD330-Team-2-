@@ -1,5 +1,5 @@
 <script>
-    import {getLocalStorage, formDataToJSON} from "../utils.mjs";
+    import {getLocalStorage, setLocalStorage, formDataToJSON, alertMessage} from "../utils.mjs";
     import {checkout} from "../externalServices.mjs"
 
     export let key = " ";
@@ -66,11 +66,13 @@ const packageItems = function (items) {
     try {
       const res = await checkout(json);
       console.log(res);
+      localStorage.removeItem("so-cart");
+      location.assign("/checkout/success.html");
     } catch (err) {
       console.log(err);
-    }
+      alertMessage("Invalid Input");
   };
-     
+  } 
   </script>
 
 <form name="checkout" on:submit|preventDefault={handleSubmit}>
@@ -78,19 +80,19 @@ const packageItems = function (items) {
     <legend>Shipping</legend>
     <div class="checkout__name">
       <label for="fname">First Name</label>
-      <input name="fname" required />
+      <input name="fname" placeholder="Your first name" required />
       <label for="lname">Last Name</label>
-      <input name="lname" required />
+      <input name="lname" placeholder="Your last name" required />
     </div>
     <div class="checkout__address">
       <label for="street">Street</label>
-      <input name="street" required />
+      <input name="street" placeholder="123 street way" required />
       <label for="city">City</label>
-      <input name="city" required />
+      <input name="city" placeholder="CoolVille" required />
       <label for="state">State</label>
-      <input name="state" required />
+      <input name="state" placeholder="Idaho" required />
       <label for="zip">Zip</label>
-      <input name="zip" id="zip" required on:blur={calculateOrdertotal} />
+      <input name="zip" id="zip" placeholder="83686" required on:blur={calculateOrdertotal} />
     </div>
   </fieldset>
   <fieldset>
@@ -103,9 +105,9 @@ const packageItems = function (items) {
       maxlength="16"
       minlength="16"
     />
-    <label for="expiration">Expiration</label>
+    <label for="expiration" placeholder="Your first name">Expiration</label>
     <input name="expiration" required placeholder="mm/yy" />
-    <label for="code">Security Code</label>
+    <label for="code" placeholder="Your first name">Security Code</label>
     <input name="code" required placeholder="xxx" maxlength="3" minlength="3" />
   </fieldset>
   <fieldset class="checkout-summary">
@@ -132,41 +134,3 @@ const packageItems = function (items) {
 
   <button id="checkoutSubmit" type="submit">Checkout</button>
 </form>
-  <!-- <form name="checkout" on:submit|preventDefault={handleSubmit}> 
-  <fieldset class="checkout-summary">
-    <legend>Shipping</legend>
-    <form class="form-content">
-        <label>First Name</label>
-        <input type="text"  name="fname"/>
-        <label>Last Name</label>
-        <input type="text"  name="lname" />
-        <label>Street</label>
-        <input type="text"  name="street"/>
-        <label>State</label>
-        <input type="text"  name="state" />
-        <label>Zip</label>
-        <input type="text"  name="zip"/>
-      </form>
-      </fieldset>
-      <fieldset> 
-        <legend>Payment</legend>
-
-      <form class="form-content" > 
-        <label>Card Number</label>
-        <input type="text" name="cardNumber"/>
-        <label>Expiration</label>
-        <input type="text"  name="expiration" />
-        <label>Security Code</label>
-        <input type="text"  name="code"/>
-    </form>
-</fieldset>
-<fieldset class="orderSummary"> 
-    <legend>Order Summary</legend>
-    <p>Subtotal ({list.length}) {itemTotal}  </p>
-    <p>Shipping Estimate ${shipping}</p>
-    <p>Tax ${tax}</p>
-    <p>Order Total: ${orderTotal} </p>
-    <button id="checkoutSubmit" type="submit">Place Order</button>
-  </fieldset>
-</form> -->
-   
