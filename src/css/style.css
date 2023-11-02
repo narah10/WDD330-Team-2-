@@ -327,10 +327,10 @@ button {
 
 /*Icon styles*/
 .icons{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   cursor: pointer;
-
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .icons img{
@@ -356,8 +356,24 @@ button {
   width:60vw;
 }
 
-
-
+/* search button */
+.searchBar {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+}
+#search {
+  padding: 8px;
+  border: 2px solid;
+  background-color: rgb(235, 235, 235);
+  margin: 10px;
+}
+.searchBar button {
+  margin: 10px;
+  padding: 8px 10px;
+  font-size: 1rem;
+}
 
 /* Large View */
 @media screen and (max-width: 2000px) {
