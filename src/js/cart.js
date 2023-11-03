@@ -1,12 +1,12 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { renderHeaderFooter } from "./utils.mjs";
-import ShoppingCart from "./components/ShoppingCart.svelte"
+import ShoppingCart from "./components/ShoppingCart.svelte";
 
 renderHeaderFooter();
 
-new ShoppingCart({ 
-  target: document.querySelector(".products")
-})
+new ShoppingCart({
+  target: document.querySelector(".products"),
+});
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -19,40 +19,95 @@ function renderCartContents() {
   }
 }
 
-export function setTotal() {
-  const getItems = getLocalStorage("so-cart");
-  let cartRetail = document.querySelector(".cart-retail");
-  let cartDiscount = document.querySelector(".cart-discount");
-  let cartTotal = document.querySelector(".cart-total");
-  let hideClass = document.querySelector(".hide");
+// export function setTotal() {
+//   const getItems = getLocalStorage("so-cart");
+//   let cartRetail = document.querySelector(".cart-retail");
+//   let cartDiscount = document.querySelector(".cart-discount");
+//   let cartTotal = document.querySelector(".cart-total");
+//   let hideClass = document.querySelector(".hide");
 
-  if (getItems.length > 0) {
-    let total = 0;
-    let retailTotal = 0;
+//   if (getItems.length > 0) {
+//     let total = 0;
+//     let retailTotal = 0;
 
-    for (let i = 0; i < getItems.length; i++) {
-      const firstItem = getItems[i].ListPrice;
-      total += firstItem;
-    }
+//     for (let i = 0; i < getItems.length; i++) {
+//       const firstItem = getItems[i].ListPrice;
+//       total += firstItem;
+//     }
 
-    for (let i = 0; i < getItems.length; i++) {
-      const firstItem = getItems[i].SuggestedRetailPrice;
-      retailTotal += firstItem;
-    }
-    let discountAmount = ((retailTotal - total) / retailTotal) * 100;
-    hideClass.classList.remove("hide");
-    cartRetail.innerHTML = `Total Retail Price: <del>$${retailTotal.toFixed(
-      2
-    )}<\del>`;
-    cartDiscount.innerHTML = `Total Discount: ${discountAmount.toFixed(0)}%`;
-    cartTotal.innerHTML = `Final Price: $${total.toFixed(2)}`;
-    // const finalTotal = total.toFixed(2);
-    // return finalTotal; 
-  } else {
-    hideClass.classList.add("hide");
-  }
-}
-setTotal();
+//     for (let i = 0; i < getItems.length; i++) {
+//       const firstItem = parseFloat(getItems[i].SuggestedRetailPrice) * parseFloat(getItems[i].quantity);
+//       retailTotal += firstItem;
+//     }
+//     let discountAmount = ((retailTotal - total) / retailTotal) * 100;
+//     hideClass.classList.remove("hide");
+//     cartRetail.innerHTML = `Total Retail Price: <del>$${retailTotal.toFixed(
+//       2
+//     )}<\del>`;
+//     cartDiscount.innerHTML = `Total Discount: ${discountAmount.toFixed(0)}%`;
+//     cartTotal.innerHTML = `Final Price: $${total.toFixed(2)}`;
+//   } else {
+//     hideClass.classList.add("hide");
+//   }
+// }
+// // setTotal();
+
+// function getQuantity() {
+//   const getItems = getLocalStorage("so-cart");
+// //   getItems.forEach(function(item) { 
+// //   if(!item.quantity){
+// //     item.quantity = 1
+// //   }
+  
+// // })
+// // setLocalStorage("so-cart", getItems);
+
+//   const prodPrices = document.querySelectorAll(".cart-card__price");
+//   let cartTotal = document.querySelector(".cart-total");
+//   let quantity = 1;
+
+//   prodPrices.forEach((prodPrice) => {
+   
+//     const addBtn = prodPrice.parentElement.querySelector(".addQ");
+//     const removeBtn = prodPrice.parentElement.querySelector(".removeQ");
+//     const displayQuantity = prodPrice.parentElement.querySelector(".quantity");
+
+//     const priceText = prodPrice.textContent;
+//     const price = parseFloat(priceText);
+//     // let quantity = 1;
+//     let amount = 0;
+//     const newTotal = 1 * price;
+
+//     addBtn.addEventListener("click", function () {
+//       getItems.length += 1;
+//       quantity += 1;
+//       displayQuantity.textContent = `Qty: ${quantity}`;
+//       amount = newTotal * quantity;
+//       prodPrice.textContent = amount.toFixed(2);
+//       setTotal()
+//       console.log(getItems.length);
+//     });
+
+//     removeBtn.addEventListener("click", function () {
+//       if (quantity > 0) {
+//         getItems.length -= 1;
+//         quantity -= 1;
+//         displayQuantity.textContent = `Qty: ${quantity}`;
+//         amount = newTotal * quantity;
+//         prodPrice.textContent = amount.toFixed(2);
+//         setTotal()
+//         console.log(getItems.length);
+//       } else {
+//         // remove
+//       }
+//     });
+//      });
+// }
+// getQuantity();
+// delete if quantity 0
+// Update cart total
+// make sure local storage saves quantity
+// the $ is messing it up?
 
 // function cartItemTemplate(item) {
 //   const newItem = `<li class="cart-card divider">
@@ -92,4 +147,4 @@ function removeFromLocalStorage(key, itemId) {
   }
 }
 
-renderCartContents();
+// renderCartContents();

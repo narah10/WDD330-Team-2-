@@ -165,9 +165,9 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-.hide {
+/* .hide {
   display: none;
-}
+} */
 /* End cart icon styles */
 
 /*Adding cart effect*/
