@@ -1,5 +1,5 @@
 import { findProductById } from "./externalServices.mjs";
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import { showError } from "./errorHandling.mjs";
 import { calculateDiscount } from "./product";
 import { cartCount } from "./stores.mjs";
@@ -69,8 +69,23 @@ export default async function productDetails(productId, selector) {
 }
 
 function addProductToCart() {
-  setLocalStorage("so-cart", product);
-  console.log("item-added");
+  const cart = getLocalStorage("so-cart")  
+  const currentItem = cart.find(item => item.Id == product.Id)
+  // get the current cart contents
+    if(currentItem){   // Check to see if current item is already in the cart
+      currentItem.quantity++;
+      console.log("already in Cart") 
+      setLocalStorage("so-cart", cart);
+        // if yes then add 1 to quantity
+    }else{
+      product.quantity = 1; 
+      setLocalStorage("so-cart", product);   // else add a quantity property to the product and insert into the cart 
+    // and insert into the cart 
+      console.log("item-added");
+    }
+
+  // setLocalStorage("so-cart", product);
+  // console.log("item-added");
 }
 
 function showCartMessage() {
