@@ -13,6 +13,19 @@ export async function getProductByCategory(category) {
   return data.Result;
 }
 
+export async function getSearchResults(category, input) {
+  const response = await fetch(baseURL + `products/search/${category}`);
+  const data = await convertToJson(response);
+  const results = data.Result
+  const filteredResults = results.filter(e => {
+    const elName = e.Name.toLowerCase();
+    if (elName.includes(input.toLowerCase())) {
+      return e
+    }
+  })
+  return filteredResults
+}
+
 export async function findProductById(id) {
   const response = await fetch(baseURL + `product/${id}`);
   const product = await convertToJson(response);
