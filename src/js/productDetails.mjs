@@ -6,8 +6,9 @@ import { cartCount } from "./stores.mjs";
 
 // Function to create breadcrumb
 function createBreadcrumb(container, category) {
-  const breadcrumbText = getBreadcrumbText(category);
-
+  const categoryName = category.replace('-', ' ')
+  const breadcrumbText = getBreadcrumbText(categoryName);
+  
   if (breadcrumbText) {
     const breadcrumbElement = document.createElement('nav');
     breadcrumbElement.classList.add('breadcrumb');

@@ -4,19 +4,20 @@
   export let productCount;
 
   let showBreadcrumb = false;
-
+  const categoryName = category.replace('-', ' ')
+  
   // Determine if breadcrumb should be displayed
   $: showBreadcrumb = category || productName;
-
-  function getBreadcrumbText() {
-    if (productName) {
-      return `${category} > ${productName} (${productCount} items)`;
-    } else if (category) {
-      return `${category} > (#${productCount})`;
-    } else {
-      return '';
-    }
-  }
+  
+  // function getBreadcrumbText() {
+  //   if (productName) {
+  //     return `${categoryName} > ${productName} (${productCount} items)`;
+  //   } else if (categoryName) {
+  //     return `${categoryName} > (#${productCount})`;
+  //   } else {
+  //     return '';
+  //   }
+  // }
 </script>
 
 {#if showBreadcrumb}
@@ -24,7 +25,7 @@
     {#if category}
       <a href="/">Home</a>
       &nbsp;>&nbsp;
-      <a href="/product_list/index.html?category={category}">{category}</a>
+      <a href="/product_list/index.html?category={category}" class="category-name">{categoryName}</a>
       ({productCount} items)
       {/if}
   </nav>
@@ -43,6 +44,9 @@
     font-weight: bold;
   }
 
+  .category-name {
+    text-transform: capitalize;
+  }
   /* .breadcrumb p {
     margin: 0;
     font-size: 14px;

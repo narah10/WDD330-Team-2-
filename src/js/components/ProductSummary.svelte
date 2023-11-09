@@ -1,8 +1,7 @@
 <script>
   import Modal from "./Modal.svelte";
   let showModal = false;
-  export let product = {};
-  console.log(product)
+  export let product = {}
 </script>
 
 <section>
