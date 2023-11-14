@@ -45,16 +45,48 @@
             You will automatically be entered to <strong>win a 40% </strong> off
              coupoun on your next purchase!
         </p>
-          <form method="get" action="thankyou.html"> 
+        <form method="get" action="thankyou.html"> 
           <input type="email" placeholder="Enter your Email">
           </form>
                 <a href="#" class="pButton">Let's Go</a>
             </div>
 
+            <button id="signup-button">Sign Up</button>
+          
+            <!-- Hidden Signup Modal -->
+            <div id="signup-modal" class="modal">
+              <div class="modal-content">
+                <span class="close" id="close-button">&times;</span>
+                <h2>Sign Up</h2>
+                <form id="signup-form" action="/users" method="POST">
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="name" required><br>
+    
+                  <label for="address">Address:</label>
+                  <input type="text" id="address" name="address" required><br>
+    
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" required><br>
+                  <br>
+                  <button type="submit">Sign Up</button>
+                </form>
+              </div>
+            </div>
       <section class="products">
       </section>
     </main>
-    <footer id="main-footer"></footer>
+    <footer id="main-footer">
+      <div class="newsletter">
+        <h1>Join our Newsletter</h1>
+        <p>Get exclusive discounts straight to your inbox</p>
+        <div class="input-group">
+          <input type="text" name="name" placeholder="Enter your name">
+          <input type="email" name="email" placeholder="Enter your email">
+          <button class="subscribe-button">Subscribe</button>
+        </div>
+        <p>You can unsubscribe at any moment</p>
+      </div>
+    </footer>    
     <script src="./js/main.js" type="module"> </script>  
     <!-- <script src="./js/externalServices.mjs" type="module"> </script>   -->
   </body>
