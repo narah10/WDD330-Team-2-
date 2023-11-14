@@ -44,3 +44,31 @@ function checkVisit(){
         document.querySelector(".popup").style.display = "none";
     });
     }
+
+
+// Show modal class when click button of Sign Up
+document.getElementById('signup-button').addEventListener('click', function() {
+    document.getElementById('signup-modal').style.display = 'block';
+  });
+  
+  // Hide when "x" is clicked
+  document.getElementById('close-button').addEventListener('click', function() {
+    document.getElementById('signup-modal').style.display = 'none';
+  });
+  
+  // Hide when is click outside the div modal
+  window.addEventListener('click', function(event) {
+    if (event.target === document.getElementById('signup-modal')) {
+      document.getElementById('signup-modal').style.display = 'none';
+    }
+  });
+
+  document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const address = document.getElementById('address').value;
+    const email = document.getElementById('email').value;
+    alert(`Welcome, ${name}! You have successfully signed up.`);
+    document.getElementById('signup-modal').style.display = 'none';
+  });
+  
