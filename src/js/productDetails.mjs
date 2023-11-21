@@ -145,3 +145,5 @@ function productDetailsTemplate(product) {
       <div id="cartMessage" class="hidden">Item added to the cart</div>
     </div>`;
 }
+
+

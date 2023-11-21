@@ -553,3 +553,27 @@ footer {
   margin-bottom: 10px; 
   object-fit: contain; 
 }
+
+
+.button-container-comment {
+  display: flex;
+ 
+}
+
+#dtext {
+  margin-top: 20px;
+}
+
+.h4-comment {
+  margin-top: 20px;
+}
+
+.comment-section,
+.textbox {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
