@@ -165,9 +165,9 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-.hide {
+/* .hide {
   display: none;
-}
+} */
 /* End cart icon styles */
 
 /*Adding cart effect*/
@@ -200,7 +200,6 @@ button {
 .product-list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
   list-style-type: none;
   padding: 0;
 }
@@ -327,15 +326,53 @@ button {
 
 /*Icon styles*/
 .icons{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   cursor: pointer;
-
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .icons img{
   width: 100px;
 
+}
+.breadcrumb {
+  /* background-color: #f8f9fa; */
+  padding: 10px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; 
+  width:60vw;
+}
+
+/* search button */
+.searchBar {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+}
+#search {
+  padding: 8px;
+  border: 2px solid;
+  background-color: rgb(235, 235, 235);
+  margin: 10px;
+}
+.searchBar button {
+  margin: 10px;
+  padding: 8px 10px;
+  font-size: 1rem;
 }
 
 /* Large View */
@@ -370,7 +407,7 @@ button {
     max-width: 1080px;
     margin: auto;
   }
-  
+
 
 }
 /* Small View */
@@ -399,3 +436,144 @@ footer {
   padding: 1em;
 }
 
+
+
+
+/* Styles for the footer */
+#main-footer {
+  background-color: #525C10;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Title footer */
+.newsletter h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Description of Newsletter */
+.newsletter p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Button and inputs*/
+.newsletter .input-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.newsletter input[type="text"],
+.newsletter input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.newsletter .subscribe-button {
+  background-color: #ff5733;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Subsbscription style */
+.newsletter p:last-child {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+
+/* Styles of modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Content modal style */
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  width: 70%;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* Style of button (X) */
+.close {
+  color: #555;
+  float: right;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+
+.product-images {
+  display: flex;
+  align-items: flex-start;
+}
+
+.main-product-image-container {
+  margin-right: 5px; 
+}
+
+.main-product-image {
+  max-width: 100%; 
+  height: auto; 
+}
+
+.color-thumbnails-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.color-thumbnail {
+  width: 80px; 
+  height: 80px; 
+  margin-right: 5px; 
+  margin-bottom: 10px; 
+  object-fit: contain; 
+}
+
+
+.button-container-comment {
+  display: flex;
+ 
+}
+
+#dtext {
+  margin-top: 20px;
+}
+
+.h4-comment {
+  margin-top: 20px;
+}
+
+.comment-section,
+.textbox {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

@@ -1,6 +1,7 @@
 import MainHeader from './components/MainHeader.svelte'
 import MainFooter from './components/MainFooter.svelte'
 import { cartCount } from './stores.mjs';
+import AlertMessage from "./components/AlertMessage.svelte"
 
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
@@ -11,14 +12,20 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  return JSON.parse(localStorage.getItem(key))||[];
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
   let cart = getLocalStorage(key) || [];
-  cart.push(data);
+  if(data.length){
+    cart = data; 
+  }else{
+    cart.push(data); 
+
+  }
+  
   localStorage.setItem(key, JSON.stringify(cart));
-  cartCount.set(cart.length);
+  cartCount.set(getCartCount());
   
 }
 // set a listener for both touchend and click
@@ -36,7 +43,17 @@ export function getParam(param) {
 }
 
 export function getCartCount(){
-  const count = getLocalStorage("so-cart")?.length ?? 0;
+  let count = 0; 
+  const items = getLocalStorage("so-cart");
+  if(items){
+  items.forEach((item) => {
+    if(item.quantity){
+      count+= item.quantity; 
+    }else{ 
+      count++;
+    }
+  });
+}
   return count;
 }
 
@@ -51,23 +68,32 @@ export function renderHeaderFooter(){
   // itemAmountInCart();
 }
 
+// takes a form element and returns an object where the key is the "name" of the form input.
+export function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
 
-// export function itemAmountInCart(){
-//   const pill = document.querySelector('.pill');
-//   function updateCartCount() {
-//       const getItems = getLocalStorage("so-cart");
-//       if(getItems.length > 0){
-//           pill.innerHTML = getItems.length;
-//       } else{
-//         pill.innerHTML = "";
-//       }
-//   }
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
 
+  return convertedJSON;
+}
 
-  
-//   updateCartCount();
-
-//   setInterval(updateCartCount, 1000); 
-  
-// }
-
+export function alertMessage(message, scroll=true, duration=3000) {
+  const alert = new AlertMessage({
+      target: document.querySelector("body"),
+      anchor: document.querySelector("main"),
+      props: {
+      message,
+      },
+  });
+    // make sure they see the alert by scrolling to the top of the window
+    //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+    if (scroll) window.scrollTo(0, 0);
+    
+    // left this here to show how you could remove the alert automatically after a certain amount of time.
+    // setTimeout(function () {
+    //   alert.$destroy();
+    // }, duration);
+}
