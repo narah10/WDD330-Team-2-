@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Home</title>
     <link rel="stylesheet" href="/css/style.css" />
+
+    <script src="./js/main.js" type="module"> </script>  
   </head>
   <body>
     <header class="divider" id="main-header">
@@ -75,8 +77,21 @@
       <section class="products">
       </section>
     </main>
-    <footer id="main-footer"></footer>
-    <script src="./js/main.js" type="module"> </script>  
+    <footer id="main-footer">
+      <div class="newsletter">
+        <h1>Join our Newsletter</h1>
+        <p>Get exclusive discounts straight to your inbox</p>
+        <div class="input-group">
+          <input type="text" name="name" placeholder="Enter your name">
+          <input type="email" name="email" placeholder="Enter your email">
+          <button class="subscribe-button" id="subscribe-button">Subscribe</button>
+
+        </div>
+        <p>You can unsubscribe at any moment</p>
+        <div class="success-message" id="successMessage">Subscription successful!</div>
+      </div>
+    </footer>
     <!-- <script src="./js/externalServices.mjs" type="module"> </script>   -->
+    
   </body>
 </html>

@@ -72,3 +72,18 @@ document.getElementById('signup-button').addEventListener('click', function() {
     document.getElementById('signup-modal').style.display = 'none';
   });
   
+  document.getElementById('subscribe-button').addEventListener('click', subscribe);
+
+    export function subscribe() {
+
+    var successMessage = document.getElementById('successMessage');
+
+    
+    successMessage.classList.add('show-success');
+
+   
+    setTimeout(function() {
+     
+        successMessage.classList.remove('show-success');
+    }, 3000); 
+}
