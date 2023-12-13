@@ -1,7 +1,7 @@
 <script>
   import ProductSummary from "./ProductSummary.svelte";
   import { getData } from "../productData.mjs";
-  import { calculateDiscount } from "../product.js";
+  // import { calculateDiscount } from "../product.js";
 
   export let category;
 
@@ -18,14 +18,14 @@
       {#if product}
         <li class="product-card">
           <ProductSummary {product} />
-          <p>Discount: {calculateDiscount(product).percentage.toFixed(2)}%</p>
+          <!-- <p>Discount: {calculateDiscount(product).percentage.toFixed(2)}%</p> -->
         </li>
       {/if}
     {/each}
   </ul>
 {/await}
 
-<style>
+<!-- <style>
   .product-card p{
     position: relative;
     background-color: rgb(194, 194, 23);
@@ -34,5 +34,30 @@
     text-align: center;
     font-weight: bold;
   }
-</style>
+</style> -->
 
+
+
+<!-- <script>
+  import ProductSummary from "./ProductSummary.svelte";
+  import { getData } from "../productData.mjs";
+
+  export let category;
+
+  let promise = getData(category);
+ 
+</script>
+
+
+
+
+<h2>Top Products {category}</h2>
+{#await promise}
+  <p>Loading</p>
+{:then data}
+  <ul class="product-list">
+    {#each data as product}
+        <li class="product-card"><ProductSummary {product} /></li>
+         {/each}
+  </ul>
+{/await} -->
